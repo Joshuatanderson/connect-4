@@ -5,7 +5,6 @@ const Circle = (props) => {
         //destructuring
     const {
         color,
-        id
     } = props
 
     return(
@@ -17,7 +16,6 @@ const Circle = (props) => {
 
 Circle.propTypes = {
     color: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired,
 }
 
 export default Circle;

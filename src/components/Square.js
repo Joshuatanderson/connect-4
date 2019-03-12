@@ -4,28 +4,31 @@ import Circle from './Circle';
 
 const Square = (props) => {
     const {
-        id,
         circles,
-        handleClick
+        handleClick,
+        col,
+        row
     } = props
+
+    let id = row*col;
 
     // add circle component, give id and key of id. 
     // pass circles[id] as a prop to circle
     //set className of circle to the id prop
     return(
-        <div onClick = {() => props.handleClick(id, circles)} className = "tile is-child box square is-info">
+        <div onClick = {() => handleClick(row, col, circles)} className = "tile is-child box square is-info">
                 {/* creates circle component */}
             <Circle 
-                id = {id}
                 key = {id}
-                color = {circles[id]}
+                color = {circles[row][col]}
             />
         </div>
     );
 }
 
 Square.propTypes = {
-    id: PropTypes.number.isRequired,
+    col: PropTypes.number.isRequired,
+    row: PropTypes.number.isRequired,
     circles: PropTypes.array.isRequired,
     handleClick: PropTypes.func.isRequired
 }

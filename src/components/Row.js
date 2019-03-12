@@ -11,7 +11,8 @@ class Row extends Component{
             squares.push(<Square 
                     //this should give a unique key to each square
                 key = {rowID * width + i}
-                id = {rowID * width + i}
+                row = {rowID}
+                col = {i}
                 circles = {circles}
                 handleClick = {handleClick}
             />);
@@ -23,14 +24,14 @@ class Row extends Component{
     render(){
         const {
             width,
-            id,
+            rowID,
             circles,
             handleClick
         } = this.props
         return(
             <div className = "tile is-parent row">
                     {/* creates squares */}
-                {this.createSquares(width, id, circles, handleClick)}
+                {this.createSquares(width, rowID, circles, handleClick)}
             </div>
             
         );
@@ -39,7 +40,7 @@ class Row extends Component{
 
 Row.propTypes = {
     width: PropTypes.number.isRequired,
-    id: PropTypes.number.isRequired,
+    rowID: PropTypes.number.isRequired,
     circles: PropTypes.array.isRequired,
     handleClick: PropTypes.func.isRequired
 }
