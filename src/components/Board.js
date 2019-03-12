@@ -17,7 +17,9 @@ class Board extends Component{
 
         //function that will change circle colors
     handleClick = (row, col, circles) => {
-        let updatedCircles = this.selectCircle(row, col, circles);
+        let lowestEmpty = this.findEmpty(col, circles);
+        // console.log(lowestEmpty)
+        let updatedCircles = this.selectCircle(lowestEmpty, col, circles);
             
         console.log(updatedCircles);
             //sets state
@@ -25,6 +27,19 @@ class Board extends Component{
             circles: updatedCircles,
             redIsNext: !this.state.redIsNext
         }));
+    }
+
+        //returns lowest empty square
+    findEmpty = (colNum, circles) => {
+        let lowestEmpty;
+                //loops through circles array
+            for(let i = circles.length; i > 0; i--){
+                    //if the circles item is empty, return it.
+                if (circles[i - 1][colNum] === ' '){
+                    return lowestEmpty = i - 1;
+                }
+            }
+        return lowestEmpty;
     }
 
         //helper function to find final circle
