@@ -17,6 +17,18 @@ class Board extends Component{
 
         //function that will change circle colors
     handleClick = (row, col, circles) => {
+        let updatedCircles = this.selectCircle(row, col, circles);
+            
+        console.log(updatedCircles);
+            //sets state
+        this.setState(() => ({
+            circles: updatedCircles,
+            redIsNext: !this.state.redIsNext
+        }));
+    }
+
+        //helper function to find final circle
+    selectCircle = (row, col, circles) => {
             //rows before and after changed circle
         let rowsBefore = circles.slice(0, row);
         let rowsAfter = circles.slice(row + 1);
@@ -27,16 +39,25 @@ class Board extends Component{
         let afterCol = targetRow.slice(col + 1)
             //sets active color
         let activeColor = this.state.redIsNext ? 'has-background-danger' : 'has-background-dark';
-            //sets final array
+            //sets final array (the array and spread operators turn the three items into one array inside the array of arrays)
         let final = rowsBefore.concat([[...beforeCol, activeColor, ...afterCol]], rowsAfter);
 
-        console.log(final);
-            //sets state
-        this.setState(() => ({
-            circles: final,
-            redIsNext: !this.state.redIsNext
-        }));
+        /**********************
+         * Question
+         ********************/
+            //QUESTION FOR MR. ERIC:  WHY DOESN'T THIS WORK?  WHY DO I NEED TWO SETS OF BRACES?
+
+        // let notFinal = rowsBefore.concat([...beforeCol, activeColor, ...afterCol], rowsAfter);
+        // console.log(notFinal);
+            //returns final array
+        return final;
     }
+
+        //this function drops a placed chip at the bottom of the board
+    gravityAction = () => {
+
+    }
+
 
         //function to create rows
     createRows = (height) => {
